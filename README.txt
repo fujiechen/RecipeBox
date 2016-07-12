@@ -1,7 +1,5 @@
 Group 1 - RecipeBox
 
-Members: Chris Greening, Cheuk Nam Yip, Dylan Thomas, Fujie Chen.
-
 This project uses a 3 tier architecture. There are five packages, found in Project/app/src/main/java/comp3350.
 Four represent major elements of the architecture - the business and objects packages represent the
 business logic, the persistence and presentation packages represent their equivalient tiers. The
