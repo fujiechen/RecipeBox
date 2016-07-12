@@ -24,11 +24,13 @@ public class DataAccessObject implements DataAccess
     private String result;
     private static String EOF = "  ";
 
+    //Constructor
     public DataAccessObject(String dbName)
     {
         this.dbName = dbName;
     }
-
+    
+    //Open HSQLDB connection
     public void open(String dbPath)
     {
         String url;
@@ -48,6 +50,7 @@ public class DataAccessObject implements DataAccess
         System.out.println("Opened " +dbType +" database " +dbPath);
     }
 
+    //Close HSQLDB connection
     public void close()
     {
         try
@@ -63,6 +66,7 @@ public class DataAccessObject implements DataAccess
         System.out.println("Closed " +dbType +" database " +dbName);
     }
 
+    //Add a new recipe
     public String addNewRecipe(String title, ArrayList<String> ingredients, String instructions, User user)
     {
         String values;
@@ -88,6 +92,7 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Add a new review
     public String addNewReview(Recipe recipe, int rate, String content, User user)
     {
         String values;
@@ -111,7 +116,8 @@ public class DataAccessObject implements DataAccess
         }
         return result;
     }
-
+    
+    //Add a new user
     public String addNewUser(String userName, String userPassword)
     {
         String values;
@@ -133,7 +139,8 @@ public class DataAccessObject implements DataAccess
         }
         return result;
     }
-
+    
+    //Get a User object by given user name
     public User getUserByName(String userName)
     {
         User user;
@@ -167,6 +174,7 @@ public class DataAccessObject implements DataAccess
         return user;
     }
 
+    //Get whole recipe list
     public String getRecipeList(List<Recipe> recipeList)
     {
         Recipe recipe;
@@ -209,7 +217,8 @@ public class DataAccessObject implements DataAccess
 
         return result;
     }
-
+    
+    //Get whole review list
     public String getReviewList(List<Review> reviewList)
     {
         Review review;
@@ -247,7 +256,8 @@ public class DataAccessObject implements DataAccess
 
         return result;
     }
-
+    
+    //Get review list related to the given recipe
     public String getReviewsByRecipe(List<Review> reviewList, Recipe recipe)
     {
         Review review;
@@ -286,6 +296,7 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Get recipe list related to the given user
     public String getRecipeListByUser(List<Recipe> recipeList, User user)
     {
         Recipe recipe;
@@ -329,6 +340,7 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Get review list related to the given user
     public String getReviewListByUser(List<Review> reviewList, User user)
     {
         Review review;
@@ -367,6 +379,7 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Get recipe object by recipe ID
     public Recipe findRecipeByID(int recipeID)
     {
         Recipe recipe;
@@ -406,6 +419,7 @@ public class DataAccessObject implements DataAccess
         return recipe;
     }
 
+    //Get review object by review ID
     public Review findReviewByID(int reviewID)
     {
         Review review;
@@ -441,6 +455,7 @@ public class DataAccessObject implements DataAccess
         return review;
     }
 
+    //Get ingredient list related to the given recipe by recipe ID
     public String findIngredientByRecipeID(List<Ingredient> ingredients, int recipeID)
     {
         int ingredientID;
@@ -472,6 +487,7 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Get user object by the given user ID
     public User findUserByID(int userID)
     {
         User user;
@@ -501,6 +517,7 @@ public class DataAccessObject implements DataAccess
         return user;
     }
 
+    //Delete the user and all profiles realted to him by the given user ID
     public String deleteUserProfile(int userID)
     {
         result = null;
@@ -516,7 +533,8 @@ public class DataAccessObject implements DataAccess
         }
         return result;
     }
-
+    
+    //Delete review by the given review ID
     public String deleteReviewByID(int reviewID)
     {
         result = null;
