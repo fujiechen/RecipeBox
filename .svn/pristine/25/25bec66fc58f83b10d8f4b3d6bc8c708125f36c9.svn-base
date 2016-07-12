@@ -1,0 +1,187 @@
+package comp3350.recipebox.tests.integration;
+
+import java.util.ArrayList;
+
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import comp3350.recipebox.application.Main;
+import comp3350.recipebox.application.Services;
+import comp3350.recipebox.business.AccessRecipe;
+import comp3350.recipebox.business.AccessReview;
+import comp3350.recipebox.business.AccessUser;
+import comp3350.recipebox.objects.Recipe;
+import comp3350.recipebox.objects.Review;
+import comp3350.recipebox.objects.User;
+
+public class BusinessPersistenceSeamTest
+{
+	public AccessUser accessUser;
+	public AccessRecipe accessRecipe;
+	public AccessReview accessReview;
+
+	@Before
+	public void startUp()
+	{
+		Services.closeDataAccess();
+
+		System.out.println("\nStarting Integration test of Business Persistence Seams");
+		Services.createDataAccess(Main.dbName);
+
+		accessRecipe = new AccessRecipe();
+		accessReview = new AccessReview();
+		accessUser = new AccessUser();
+	}
+
+	@Test
+	public void testAccessUser()
+	{
+		User user;
+
+		Assert.assertTrue(accessUser.addUser("test1", "password"));
+
+		user = accessUser.getUserByName("test1");
+		Assert.assertNotNull(user);
+
+		Assert.assertTrue(accessUser.isFoundUser("test1"));
+
+		int userID = user.getID();
+		Assert.assertTrue(accessUser.isFoundUser(userID));
+
+		user = accessUser.getUserByID(userID);
+		Assert.assertNotNull(user);
+
+		Assert.assertTrue(accessUser.login("test1", "password"));
+		Assert.assertTrue(accessUser.isLogin());
+
+		user = accessUser.getCurrentAccount();
+		Assert.assertNotNull(user);
+
+		userID = accessUser.getCurrentUserID();
+		Assert.assertTrue(accessUser.isFoundUser(userID));
+
+		Assert.assertTrue(accessUser.logout());
+
+		Assert.assertTrue(accessUser.deleteUserProfile(userID));
+	}
+
+	@Test
+	public void testAccessRecipe()
+	{
+		User user;
+		Recipe recipe;
+
+		String title = "eatMe";
+		String instruction = "do This do That";
+		ArrayList<String> ingredients = new ArrayList<>();
+		ingredients.add("HCl");
+		ingredients.add("NaOH");
+
+		Assert.assertTrue(accessUser.addUser("test2", "password"));
+		user = accessUser.getUserByName("test2");
+		Assert.assertNotNull(user);
+
+		try {
+			accessRecipe.addRecipe(title, ingredients, instruction, user);
+			accessRecipe.addRecipe(title, ingredients, instruction, user);
+		} catch (Error e) {
+			Assert.fail();
+		}
+
+		ArrayList<Recipe> recipes = accessRecipe.getRecipes();
+		Assert.assertNotNull(recipes);
+
+		recipes = accessRecipe.getRecipeListByUser(user);
+		Assert.assertNotNull(recipes);
+		int id = recipes.get(0).getRecipeID();
+		recipe = accessRecipe.getRecipe(id);
+		Assert.assertNotNull(recipe);
+
+		Assert.assertEquals(recipe.getTitle(), title);
+		Assert.assertEquals(recipe.getUserID(), user.getID());
+		Assert.assertEquals(recipe.getInstruction(), instruction);
+		Assert.assertEquals(recipe, accessRecipe.getRecipe(id));
+
+		title = "eat another";
+		instruction = "do another";
+		ingredients = new ArrayList<String>();
+		ingredients.add("123");
+		ingredients.add("345");
+		accessRecipe.updateRecipe(id, title, ingredients, instruction);
+		recipe = accessRecipe.getRecipe(id);
+		Assert.assertNotNull(recipe);
+
+		Assert.assertEquals(recipe.getTitle(), title);
+		Assert.assertEquals(recipe.getUserID(), user.getID());
+		Assert.assertEquals(recipe.getInstruction(), instruction);
+		Assert.assertEquals(recipe, accessRecipe.getRecipe(id));
+
+		recipes = accessRecipe.getRecipesByKeyword("Egg");
+		Assert.assertNotNull(recipes);
+
+		accessRecipe.deleteRecipe(id);
+	}
+
+	@Test
+	public void testAccessReview()
+	{
+		User user;
+		Recipe recipe;
+		Review review;
+
+		Assert.assertTrue(accessUser.addUser("test3", "password"));
+		user = accessUser.getUserByName("test3");
+		Assert.assertNotNull(user);
+
+		String title = "eatMe";
+		String instruction = "do This do That";
+		ArrayList<String> ingredients = new ArrayList<>();
+		ingredients.add("HCl");
+		ingredients.add("NaOH");
+
+		try {
+			accessRecipe.addRecipe(title, ingredients, instruction, user);
+		} catch (Error e) {
+			Assert.fail();
+		}
+
+		ArrayList<Recipe> recipes = accessRecipe.getRecipes();
+		Assert.assertNotNull(recipes);
+
+		recipes = accessRecipe.getRecipeListByUser(user);
+		Assert.assertNotNull(recipes);
+		int id = recipes.get(0).getRecipeID();
+		recipe = accessRecipe.getRecipe(id);
+		Assert.assertNotNull(recipe);
+
+		Assert.assertTrue(accessReview.addReview(recipe, 5, "Good", user));
+		Assert.assertFalse(accessReview.addReview(recipe, -1, "Good", user));
+		Assert.assertFalse(accessReview.addReview(recipe, 6, "Good", user));
+
+		ArrayList<Review> reviews = accessReview.getReviewListByUser(user);
+		Assert.assertNotNull(reviews);
+		review = reviews.get(0);
+		Assert.assertNotNull(review);
+
+		reviews = accessReview.getReviewsByRecipe(recipe);
+		Assert.assertNotNull(reviews);
+		review = reviews.get(0);
+		Assert.assertNotNull(review);
+
+		id = review.getReviewID();
+		review = accessReview.getReview(id);
+		Assert.assertNotNull(review);
+
+		accessReview.deleteReview(id);
+	}
+
+	@After
+	public void tearDown()
+	{
+		Services.closeDataAccess();
+
+		System.out.println("Finished Integration test of Business Persistence Seams");
+	}
+}

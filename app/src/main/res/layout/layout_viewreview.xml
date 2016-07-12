@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/outer_margin">
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rating"
+        android:isIndicator="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="70dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/reviewText"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:nestedScrollingEnabled="true"
+        android:layout_above="@+id/rating"
+        android:layout_below="@+id/recipeName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/authorName"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textAlignment="center"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/recipeName"
+        android:layout_below="@+id/authorName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:weightSum="1"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="172dp"
+            android:layout_height="fill_parent"
+            android:text="VIEW THIS USER&apos;S PROFILE"
+            android:id="@+id/userButton"
+            android:layout_gravity="bottom"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/recipeName" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:text="Delete Review"
+            android:id="@+id/deleteReviewButton"
+            android:layout_alignTop="@+id/userButton"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/userButton" />
+
+    </LinearLayout>
+
+</RelativeLayout>

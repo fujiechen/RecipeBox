@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.ViewRecipeActivity"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/outer_margin"
+    android:nestedScrollingEnabled="false">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:paddingBottom="@dimen/inner_margin"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/recipeTitle"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:layout_below="@+id/recipeTitle"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/linearLayout2">
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="115dp"
+            android:paddingBottom="@dimen/inner_margin"
+            android:id="@+id/listView"
+            android:nestedScrollingEnabled="true"
+            android:choiceMode="singleChoice"
+            android:layout_marginTop="25dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Instructions:"
+            android:id="@+id/textView2" />
+
+        <ScrollView
+            android:id="@+id/scroller"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:scrollbars="vertical"
+            android:paddingBottom="@dimen/inner_margin"
+            android:fillViewport="true"
+            android:layout_marginTop="0dp"
+            android:layout_weight="0.88">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/inner_margin"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/textView4"
+                android:layout_marginTop="15dp"/>
+        </ScrollView>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/linearLayout"
+            style="?android:attr/buttonBarButtonStyle"
+            android:weightSum="1">
+
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="fill_parent"
+                android:text="View Reviews"
+                android:id="@+id/viewReviewsButton"
+                android:onClick="showReviews"
+                android:layout_weight=".33" />
+
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="fill_parent"
+                android:text="Add Review"
+                android:id="@+id/addReviewButton"
+                android:onClick="addReview"
+                android:layout_weight=".33" />
+
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="fill_parent"
+                android:text="Edit Recipe"
+                android:id="@+id/editRecipeButton"
+                android:layout_weight=".33" />
+
+            <Button
+                android:layout_width="73dp"
+                android:layout_height="fill_parent"
+                android:text="Delete Recipe"
+                android:id="@+id/deleteRecipeButton" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="30dp"
+                android:layout_height="fill_parent"
+                android:text="View Author"
+                android:id="@+id/authorButton"
+                android:layout_weight=".33" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Ingredients:"
+        android:id="@+id/textView"
+        android:layout_below="@+id/recipeTitle"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Author: "
+        android:id="@+id/authorName"
+        android:layout_weight="0.21"
+        android:layout_above="@+id/linearLayout2"
+        android:layout_alignParentStart="true"
+        android:textAlignment="center" />
+
+</RelativeLayout>

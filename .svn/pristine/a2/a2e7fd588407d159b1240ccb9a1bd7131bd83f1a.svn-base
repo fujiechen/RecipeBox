@@ -1,0 +1,153 @@
+package comp3350.recipebox.presentation;
+
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+import comp3350.recipebox.business.AccessRecipe;
+import comp3350.recipebox.business.AccessReview;
+
+import comp3350.recipebox.R;
+import comp3350.recipebox.business.AccessUser;
+import comp3350.recipebox.objects.Recipe;
+import comp3350.recipebox.objects.Review;
+import comp3350.recipebox.objects.User;
+
+public class ViewUserActivity extends Activity
+{
+
+    private User user;
+    private ArrayAdapter recipeAdapter;
+    private ArrayAdapter reviewAdapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.layout_viewuser);
+        AccessUser accessUser = new AccessUser();
+        AccessReview accessReview = new AccessReview();
+        AccessRecipe accessRecipe = new AccessRecipe();
+
+        final Button deleteUserButton = (Button) findViewById(R.id.deleteUserButton);
+
+        Bundle extras = getIntent().getExtras();
+        int userID = -1;
+
+        if (extras != null)
+            userID = extras.getInt("userID");
+
+        if (userID != -1)
+        {
+            user = accessUser.getUserByID(userID);
+            ((TextView) findViewById(R.id.name)).setText("User: " + user.getName());
+
+            ArrayList<Recipe> userRecipes = accessRecipe.getRecipeListByUser(user);
+            final ArrayList<Review> userReviews = accessReview.getReviewListByUser(user);
+
+            ArrayList<Recipe> reviewedRecipes = new ArrayList<Recipe>();
+
+            for(int i = 0; i < userReviews.size(); i++)
+            {
+                reviewedRecipes.add(accessRecipe.getRecipe((userReviews.get(i)).getRecipeID()));
+            }
+
+            reviewAdapter = new ArrayAdapter<Recipe>(this, android.R.layout.simple_list_item_1, reviewedRecipes);
+            recipeAdapter = new ArrayAdapter<Recipe>(this, android.R.layout.simple_list_item_1, userRecipes);
+
+            ListView recipeList = ((ListView) findViewById(R.id.Recipes));
+            recipeList.setAdapter(recipeAdapter);
+
+            ListView reviewList = ((ListView) findViewById(R.id.Reviews));
+            reviewList.setAdapter(reviewAdapter);
+
+            recipeList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    Intent intent = new Intent(ViewUserActivity.this, ViewRecipeActivity.class);
+                    Recipe selectedRecipe = (Recipe)recipeAdapter.getItem(position);
+                    intent.putExtra("recipeID", selectedRecipe.getRecipeID());
+                    startActivity(intent);
+                }
+            });
+
+            reviewList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    Intent intent = new Intent(ViewUserActivity.this, ViewReviewActivity.class);
+                    Review selectedReview = userReviews.get(position);
+                    intent.putExtra("reviewID", selectedReview.getReviewID());
+                    startActivity(intent);
+                }
+            });
+
+            if (!accessUser.getUserByID(userID).equals(accessUser.getCurrentAccount()))
+            {
+                deleteUserButton.setVisibility(View.GONE);
+                deleteUserButton.setEnabled(false);
+            } else {
+                deleteUserButton.setEnabled(true);
+                deleteUserButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteUserDialog();
+                    }
+                });
+            }
+        }
+    }
+
+    private void deleteUserDialog()
+    {
+
+        AlertDialog.Builder builder;
+        AlertDialog dialog;
+        final AccessUser accessUser = new AccessUser();
+
+        builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to delete your account, including all posted recipes and reviews?");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                accessUser.deleteUserProfile(accessUser.getCurrentUserID());
+                accessUser.logout();
+
+                dialog.dismiss();
+
+                Intent intent = new Intent(ViewUserActivity.this, MainActivity.class);
+                startActivity(intent);
+
+                finish();
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                dialog.dismiss();
+            }
+        });
+
+        dialog = builder.create();
+        dialog.show();
+    }
+
+}

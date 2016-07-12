@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.AddRecipeActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:rowCount="7"
+    android:alignmentMode="alignBounds"
+    android:gravity="center"
+    android:layout_margin="@dimen/outer_margin">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:id="@+id/titleField"
+        android:inputType="none"
+        android:elegantTextHeight="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:hint="Enter Title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingredients:"
+        android:id="@+id/ingredientsLabel"
+        android:textSize="@dimen/text_size"
+        android:layout_below="@+id/titleField"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ingredientsList"
+        android:choiceMode="singleChoice"
+        android:scrollbars="vertical"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ingredientsLabel"
+        android:layout_above="@+id/ingredientFieldsContainer"
+        android:nestedScrollingEnabled="true"
+        android:clickable="true"
+        android:importantForAccessibility="yes" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ingredientFieldsContainer"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:weightSum="1">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/text_field_height"
+            android:id="@+id/quantityField"
+            android:hint="Enter Quantity" />
+
+        <EditText
+            android:layout_width="89dp"
+            android:layout_height="@dimen/text_field_height"
+            android:id="@+id/ingredientNameField"
+            android:hint="Enter Name"
+            android:layout_weight="1.02" />
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="+"
+            android:id="@+id/addButton"
+            android:onClick="addIngredient"
+            android:textAlignment="center" />
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="-"
+            android:id="@+id/removeButton"
+            android:layout_weight="0.03"
+            android:onClick="removeIngredient"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/instructionsField"
+        android:singleLine="false"
+        android:inputType="textMultiLine"
+        android:layout_above="@+id/submitButton"
+        android:layout_alignParentStart="true"
+        android:hint="Enter Instructions"
+        android:layout_below="@+id/ingredientFieldsContainer" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Submit"
+        android:id="@+id/submitButton"
+        android:enabled="false"
+        android:onClick="submitRecipe"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

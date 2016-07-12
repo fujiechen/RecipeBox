@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="comp3350.recipebox">
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".presentation.MainActivity"
+            android:label="Recipe Box">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".presentation.AddRecipeActivity"
+            android:label="Recipe Box - Add Recipe"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".presentation.ViewRecipeActivity"
+            android:label="Recipe Box - View Recipe"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".presentation.ViewReviewListActivity"
+            android:label="Recipe Box - View Reviews"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".presentation.ViewReviewActivity"
+            android:label="Recipe Box - View a Review"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".presentation.AddReviewActivity"
+            android:label="Recipe Box - Add a Review"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".presentation.LoginActivity"
+            android:label="Recipe Box - Log In"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".presentation.ViewUserActivity"
+            android:label="Recipe Box - View User"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".presentation.SearchActivity"
+            android:label="Recipe Box - Search Recipe"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".presentation.EditRecipeActivity"
+            android:label="Recipe Box - Search Recipe"
+            android:windowSoftInputMode="adjustPan"/>
+    </application>
+
+</manifest>

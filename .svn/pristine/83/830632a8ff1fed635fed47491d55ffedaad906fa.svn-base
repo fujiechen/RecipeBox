@@ -1,0 +1,29 @@
+Group 1 - RecipeBox
+
+Members: Chris Greening, Cheuk Nam Yip, Dylan Thomas, Fujie Chen.
+
+The URL of repository is:
+svn+ssh://aviary.cs.umanitoba.ca/home/student/chenf345/RecipeBox/repository
+
+This project uses a 3 tier architecture. There are five packages, found in Project/app/src/main/java/comp3350.
+Four represent major elements of the architecture - the business and objects packages represent the
+business logic, the persistence and presentation packages represent their equivalient tiers. The
+application package simply consists of some code needed to initialize the data. All of the xml files
+can be found in Project/app/src/main/res.
+
+The major features implemented at this point are the recipes themselves, the reviews, and the user
+accounts. Currently, the log in screen is accessible from a link in the main screen. Users can
+view recipes and reviews while not logged in, but cannot add any. Logged in users can add a recipe
+from the main screen, can browse recipes from the main screen. Selecting a recipe will show details
+(such as the instructions and ingredients list) and will display a link to the list of reviews, and
+a link to the author. The list of reviews again displays a list of abbreviated reviews, which can in
+turn be clicked to read the full text. Searching is possible through a button in the main screen.
+
+Sometimes the project cannot be run when the project checks out first time.
+You should fix the local configure file, and restart Android Studio.
+
+For running the app with the stub database, please change line 13 in application.Services.java:
+    dataAccessService = new DataAccessStub(dbName);
+
+For running the app with real database (HSQLDB), please change the line 13 in application.Services.java:
+    dataAccessService = new DataAccessObject(dbName);

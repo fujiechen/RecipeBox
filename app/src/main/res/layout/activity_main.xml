@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/outer_margin"
+    tools:context=".presentation.MainActivity">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label"
+        android:id="@+id/linearLayout4"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Sort By Rating"
+            android:id="@+id/sortRatingButton"
+            android:onClick="sortByRating"
+            android:layout_below="@+id/label"
+            android:layout_alignStart="@+id/showAddRecipeMenuButton"
+            android:layout_weight=".4" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:id="@+id/searchButton"
+            android:layout_below="@+id/label"
+            android:onClick="showSearchMenu"
+            android:layout_alignEnd="@+id/showAddRecipeMenuButton"
+            android:layout_toEndOf="@+id/sortRatingButton"
+            android:layout_weight=".6" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:text="Add a new recipe"
+        android:id="@+id/showAddRecipeMenuButton"
+        android:onClick="showAddRecipeMenu"
+        android:nestedScrollingEnabled="true"
+        android:layout_above="@+id/linearLayout3"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Posted Recipes"
+        android:id="@+id/label"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/recipeList"
+        tools:listitem="@android:layout/simple_list_item_1"
+        android:nestedScrollingEnabled="true"
+        android:choiceMode="singleChoice"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/showAddRecipeMenuButton"
+        android:layout_below="@+id/linearLayout4" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout3"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="LOG IN"
+            android:id="@+id/loginButton"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:onClick="login"
+            android:layout_weight=".5" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="View Profile"
+            android:id="@+id/viewProfileButton"
+            android:layout_weight=".5"
+            android:onClick="viewProfile"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</RelativeLayout>
