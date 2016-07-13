@@ -229,6 +229,7 @@ public class MainActivity extends Activity
     private void viewAsGuest()
     {
         addRecipeButton.setVisibility(View.GONE);
+        viewProfileButton.setVisibility(View.GONE);
         loginButton.setText("LOG IN");
         loginButton.setOnClickListener(new View.OnClickListener()
         {
