@@ -526,6 +526,7 @@ public class DataAccessObject implements DataAccess
             cmdString = "Delete from User " + " Where userID=" + userID;
             updateCount = st3.executeUpdate(cmdString);
             result = checkWarning(st3, updateCount);
+            reCalRateAll();
         }
         catch(Exception e)
         {
@@ -533,8 +534,7 @@ public class DataAccessObject implements DataAccess
         }
         return result;
     }
-    
-    //Delete review by the given review ID
+
     public String deleteReviewByID(int reviewID)
     {
         result = null;
@@ -543,6 +543,7 @@ public class DataAccessObject implements DataAccess
             cmdString = "Delete from Review " + " Where reviewID=" + reviewID;
             updateCount = st3.executeUpdate(cmdString);
             result = checkWarning(st3, updateCount);
+            reCalRateAll();
         }
         catch(Exception e)
         {
@@ -559,6 +560,7 @@ public class DataAccessObject implements DataAccess
             cmdString = "Delete from Recipe " + " Where recipeID=" + recipeID;
             updateCount = st3.executeUpdate(cmdString);
             result = checkWarning(st3, updateCount);
+            reCalRateAll();
         }
         catch(Exception e)
         {
@@ -701,6 +703,27 @@ public class DataAccessObject implements DataAccess
             cmdString = "Delete from Ingredient " + " Where recipeID=" + recipeID;
             updateCount = st3.executeUpdate(cmdString);
             result = checkWarning(st3, updateCount);
+        }
+        catch(Exception e)
+        {
+            result = processSQLError(e);
+        }
+        return result;
+    }
+
+    private String reCalRateAll()
+    {
+        result = null;
+
+        try
+        {
+            cmdString = "SELECT RECIPEID FROM REVIEW";
+            rs4 = st2.executeQuery(cmdString);
+
+            while (rs4.next()) {
+                reCalRate( rs4.getInt("RECIPEID"));
+            }
+            rs4.close();
         }
         catch(Exception e)
         {
