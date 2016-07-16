@@ -711,6 +711,7 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Calculate the all recipes average rating
     private String reCalRateAll()
     {
         result = null;
@@ -732,6 +733,7 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Calculate the given recipe average rating
     private String reCalRate(int recipeID)
     {
         int sum = 0;
@@ -763,6 +765,7 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Update the given recipe average rating
     private String updateRecipeAvgRate(int recipeID, double average)
     {
         result = null;
@@ -779,6 +782,7 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Get the next avaiable recipe id
     private int getNextRecipeID()
     {
         int nextID = 0;
@@ -802,6 +806,7 @@ public class DataAccessObject implements DataAccess
         return nextID;
     }
 
+    //Get the next avaiable review id
     private int getNextReviewID()
     {
         int nextID = 0;
@@ -823,6 +828,7 @@ public class DataAccessObject implements DataAccess
         return nextID;
     }
 
+    //Get the next avaiable ingredient id
     private int getNextIngredientID()
     {
         int nextID = 0;
@@ -846,6 +852,7 @@ public class DataAccessObject implements DataAccess
         return nextID;
     }
 
+    //Get the next avaiable user id
     private int getNextUserID()
     {
         int nextID = 0;
