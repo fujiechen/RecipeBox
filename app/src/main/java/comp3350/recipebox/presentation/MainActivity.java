@@ -73,6 +73,7 @@ public class MainActivity extends Activity
         });
     }
 
+    //Display posted recipes
     private void displayPostedRecipes()
     {
         recipes = accessRecipe.getRecipes();
@@ -126,6 +127,7 @@ public class MainActivity extends Activity
         Main.shutDown();
     }
 
+    //Copy database to device
     private void copyDatabaseToDevice()
     {
         final String DB_PATH = "db";
@@ -155,6 +157,7 @@ public class MainActivity extends Activity
         }
     }
 
+    //Copy all assets to directory
     public void copyAssetsToDirectory(String[] assets, File directory) throws IOException
     {
         AssetManager assetManager = getAssets();
@@ -186,31 +189,35 @@ public class MainActivity extends Activity
         }
     }
 
+    //Go to add recipe view
     public void showAddRecipeMenu(View view)
     {
         Intent addRecipe = new Intent(MainActivity.this, AddRecipeActivity.class);
         startActivity(addRecipe);
     }
 
-
+    //Go to log in view
     public void login(final View view)
     {
         Intent login = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(login);
     }
 
+    //Go to search view
     public void showSearchMenu(View view)
     {
         Intent search = new Intent(MainActivity.this, SearchActivity.class);
         startActivity(search);
     }
 
+    //Logout
     public void logout()
     {
         accessUser.logout();
         viewAsGuest();
     }
 
+    //View as any user
     private void viewAsUser()
     {
         addRecipeButton.setVisibility(View.VISIBLE);
@@ -226,6 +233,7 @@ public class MainActivity extends Activity
         });
     }
 
+    //View as guest
     private void viewAsGuest()
     {
         addRecipeButton.setVisibility(View.GONE);
@@ -241,6 +249,7 @@ public class MainActivity extends Activity
         });
     }
 
+    //View profile
     public void viewProfile(View view)
     {
         Intent intent = new Intent(MainActivity.this, ViewUserActivity.class);
