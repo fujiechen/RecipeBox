@@ -21,6 +21,7 @@ public class AccessUser
 		this.dataAccess = Services.getDataAccess(Main.dbName);
 	}
 
+	//Add a new user
 	public boolean addUser(String name, String password)
 	{
 		if (name.trim().equals("") && password.equals(""))
@@ -33,6 +34,7 @@ public class AccessUser
 		return false;
 	}
 
+	//Get User Object by user name
 	public User getUserByName(String name)
 	{
 		return dataAccess.getUserByName(name);
