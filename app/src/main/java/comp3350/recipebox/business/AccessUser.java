@@ -40,26 +40,31 @@ public class AccessUser
 		return dataAccess.getUserByName(name);
 	}
 
+	//Determine the given user name has already existed
 	public boolean isFoundUser(String name)
 	{
 		return getUserByName(name) != null;
 	}
 
+	//Determine the given user id has already existed
 	public boolean isFoundUser(int id)
 	{
 		return getUserByID(id) != null;
 	}
 
+	//Get User Object by user id
 	public User getUserByID(int id)
 	{
 		return dataAccess.findUserByID(id);
 	}
 
+	//Determine the user logged in
 	public boolean isLogin()
 	{
 		return account.isLogin();
 	}
 
+	//Try to log in
 	public boolean login(String name, String password)
 	{
 		User user = dataAccess.getUserByName(name);
@@ -74,6 +79,7 @@ public class AccessUser
 		return false;
 	}
 
+	//Log out
 	public boolean logout()
 	{
 		if (account.isLogin())
@@ -84,6 +90,7 @@ public class AccessUser
 		return false;
 	}
 
+	//Delete all things about the given user id
 	public boolean deleteUserProfile(int userID)
 	{
 		if (getUserByID(userID) != null)
@@ -94,11 +101,13 @@ public class AccessUser
 		return false;
 	}
 
+	//Get the current logged in user
 	public User getCurrentAccount()
 	{
 		return account.getUser();
 	}
 
+	//Get the current logged in user id
 	public int getCurrentUserID()
 	{
 		return account.getUserID();
