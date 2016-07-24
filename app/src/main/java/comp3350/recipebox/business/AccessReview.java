@@ -51,11 +51,13 @@ public class AccessReview
 		return reviews;
 	}
 
+	//Get the review By its id
 	public Review getReview(int id)
 	{
 		return dataAccess.findReviewByID(id);
 	}
 
+	//Get the review List by the given user object
 	public ArrayList<Review> getReviewListByUser(User user)
 	{
 		reviews = new ArrayList<Review>();
