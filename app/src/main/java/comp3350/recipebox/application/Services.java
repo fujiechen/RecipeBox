@@ -6,6 +6,7 @@ public class Services
 {
     private static DataAccess dataAccessService = null;
 
+    //Create Data Access
     public static DataAccess createDataAccess(String dbName)
     {
         if (dataAccessService == null)
@@ -16,6 +17,7 @@ public class Services
         return dataAccessService;
     }
 
+    //Create Data Access
     public static DataAccess createDataAccess(DataAccess alternateDataAccessService)
     {
         if (dataAccessService == null)
@@ -26,6 +28,7 @@ public class Services
         return dataAccessService;
     }
 
+    //Get Data Access
     public static DataAccess getDataAccess(String dbName)
     {
         if (dataAccessService == null)
@@ -35,7 +38,8 @@ public class Services
         }
         return dataAccessService;
     }
-
+    
+    //Close Data Access
     public static void closeDataAccess()
     {
         if (dataAccessService != null)
