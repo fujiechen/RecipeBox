@@ -535,6 +535,7 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Delete the review by the review ID
     public String deleteReviewByID(int reviewID)
     {
         result = null;
@@ -552,6 +553,7 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Delete recipe by recipe id
     public String deleteRecipeByID(int recipeID)
     {
         result = null;
@@ -569,6 +571,7 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Update recipe by its id and other parameters
     public String updateRecipe(int recipeID, String title, ArrayList<String> ingredients, String instructions) {
         String values;
         String where;
@@ -589,6 +592,7 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Get the recipe list by the given keyword
     public String getRecipeByKeyword(List<Recipe> recipeList, String keyword)
     {
         Recipe recipe;
@@ -632,6 +636,7 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Check the warning of SQL
     public String checkWarning(Statement st, int updateCount)
     {
         String result;
@@ -656,6 +661,7 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Show the SQL error
     public String processSQLError(Exception e)
     {
         String result = "*** SQL Error: " + e.getMessage();
@@ -665,6 +671,7 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Add new ingredient to database
     private String addNewIngredient(int recipeID, ArrayList<String> ingredients)
     {
         String values;
@@ -689,12 +696,14 @@ public class DataAccessObject implements DataAccess
         return result;
     }
 
+    //Update ingredients by recipe id
     private void updateIngredientByList(int recipeID, ArrayList<String> ingredients)
     {
         deleteIngredientByRecipeID(recipeID);
         addNewIngredient(recipeID, ingredients);
     }
 
+    //Delete ingredients by recipe id
     private String deleteIngredientByRecipeID(int recipeID)
     {
         result = null;
