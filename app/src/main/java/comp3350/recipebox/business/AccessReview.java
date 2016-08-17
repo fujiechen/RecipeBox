@@ -26,6 +26,7 @@ public class AccessReview
 		this.dataAccess = Services.getDataAccess(Main.dbName);
 	}
 
+	//Add a new review
 	public boolean addReview(Recipe recipe, int rating, String text, User user)
 	{
 		text = text.trim();
@@ -39,11 +40,13 @@ public class AccessReview
 		return true;
 	}
 
+	//delete review by review id
 	public void deleteReview(int id)
 	{
 		dataAccess.deleteReviewByID(id);
 	}
 
+	//Get review list by the recipe object
 	public ArrayList<Review> getReviewsByRecipe(Recipe recipe)
 	{
 		reviews = new ArrayList<Review>();
