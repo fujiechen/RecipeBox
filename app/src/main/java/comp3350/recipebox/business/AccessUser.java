@@ -10,11 +10,13 @@ public class AccessUser
 	private DataAccess dataAccess;
 	private static Account account = Account.getAccount();
 
+	//Constructor
 	public AccessUser()
 	{
 		dataAccess = Services.getDataAccess(Main.dbName);
 	}
 
+	//Constructor
 	public AccessUser(DataAccess dataAccess)
 	{
 		this.dataAccess = dataAccess;

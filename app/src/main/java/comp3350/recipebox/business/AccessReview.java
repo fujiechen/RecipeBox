@@ -14,12 +14,14 @@ public class AccessReview
 	private DataAccess dataAccess;
 	private ArrayList<Review> reviews;
 
+	//Constructor
 	public AccessReview()
 	{
 		dataAccess = Services.getDataAccess(Main.dbName);
 		reviews = null;
 	}
-
+	
+	//Constructor
 	public AccessReview(DataAccess dataAccess)
 	{
 		this.dataAccess = dataAccess;

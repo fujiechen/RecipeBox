@@ -9,8 +9,10 @@ import comp3350.recipebox.objects.Review;
 
 public class ListSorter
 {
+	//Constructor
 	public ListSorter() { }
 
+	//Sort the recipe list by recipes' rating
 	public void sortRecipeByRating(List<Recipe> recipes)
 	{
 		assert recipes != null;
@@ -35,6 +37,7 @@ public class ListSorter
 		}
 	}
 
+	//Sort review list by reviews' rating
 	public void sortReviewByRating(List<Review> reviews)
 	{
 		if (reviews != null && !reviews.isEmpty())
