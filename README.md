@@ -1,4 +1,4 @@
-Group 1 - RecipeBox
+#Group 1 - RecipeBox
 
 This project uses a 3 tier architecture. There are five packages, found in Project/app/src/main/java/comp3350.
 Four represent major elements of the architecture - the business and objects packages represent the
